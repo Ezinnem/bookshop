@@ -77,3 +77,19 @@ exports.deleteOneBook = async (req, res) => {
         })
     }
 };
+
+exports.deleteAllBooks = async (req, res) => {
+    await Book.deleteMany({})
+
+    try {
+        res.status(204).json({
+            status: 'Success',
+            data: {}
+        })
+    } catch (err) {
+        res.status(500).json({
+            status: 'Failed',
+            message: err
+        })
+    }
+};
