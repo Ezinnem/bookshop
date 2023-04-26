@@ -11,9 +11,7 @@ let config = require('config');
 let options = { useNewUrlParser: true, useUnifiedTopology: true }
 
 //db connection      
-mongoose.connect(config.DBHost, options).then(() => {
-    console.log('Database connected..')
-})
+mongoose.connect(config.DBHost, options);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
