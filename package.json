@@ -26,7 +26,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "mocha --timeout 10000"
+    "test": "NODE_ENV=testing mocha --recursive --exit --timeout 10000"
   },
   "bugs": {
     "url": "https://github.com/Ezinnem/bookshop/issues"
