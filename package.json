@@ -15,7 +15,7 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "config": "^1.20.1",
-    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
     "express": "^4.13.4",
     "mongoose": "^7.0.3",
     "morgan": "^1.7.0",
@@ -28,8 +28,8 @@
     "mocha": "^10.2.0"
   },
   "scripts": {
-    "start": "node index.js",
-    "test": "jest --testTimeout=5000"
+    "start": "export NODE_ENV=develie && node index.js",
+    "test": "NODE_ENV=testing mocha --recursive --exit --timeout 10000"
   },
   "bugs": {
     "url": "https://github.com/Ezinnem/bookshop/issues"

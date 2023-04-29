@@ -1,4 +1,4 @@
-{ 
+{
     "DBHost": "mongodb+srv://mongodb:mongodb@cluster0.i99h3yv.mongodb.net/?retryWrites=true&w=majority",
     "testDBHost": "mongodb+srv://mongodb:mongodb@cluster0.og42rby.mongodb.net/?retryWrites=true&w=majority"
 }
