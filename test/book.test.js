@@ -1,3 +1,4 @@
+require("dotenv").config();
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 
@@ -6,6 +7,12 @@ chai.use(chaiHttp);
 const expect = chai.expect;
 
 const app = require("../index");
+
+before(function (done) {
+    this.timeout(5000);
+    setTimeout(done, 1000);
+});
+
 
 before(function (done) {
     this.timeout(5000);
