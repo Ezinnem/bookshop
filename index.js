@@ -1,31 +1,34 @@
 const express = require('express')
-const app = express();
-
-const bookController = require('./controllers/bookController');
-
-
 const mongoose = require('mongoose');
 
-//db config and options 
 let config = require('config');
 let options = { useNewUrlParser: true, useUnifiedTopology: true }
 
-//db connection      
-mongoose.connect(config.DBHost, options);
+const dbConfig = config.get('DBHost');
+mongoose.connect(dbConfig, options).then(() => {
+    console.log('Database connected..')
+})
 
-app.use(express.urlencoded({ extended: true }));
+
+const app = express();
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.post('/createBook', bookController.createBook);
 
-app.get('/getAllBooks', bookController.getAllBooks);
+const {createBook, getAllBooks, getOneBook, updateOneBook, deleteOneBook} = require('./controllers/bookController');
 
-app.get('/book/:id', bookController.getOneBook);
+app.post('/createBook', createBook);
 
-app.patch('/updateBook/:id', bookController.updateOneBook);
+app.get('/getAllBooks', getAllBooks);
 
-app.delete('/deleteBook/:id', bookController.deleteOneBook)
+app.get('/book/:id', getOneBook);
 
-const PORT = 1994
+app.patch('/updateBook/:id', updateOneBook);
+
+app.delete('/deleteBook/:id', deleteOneBook)
+
+const PORT = config.get('serverPort');
 app.listen(PORT, () => {
     console.log(`Server is running on PORT ${PORT}...`)
 })
+
+module.exports = app;
