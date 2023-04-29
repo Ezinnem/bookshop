@@ -14,20 +14,24 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.1",
-    "config": "^1.20.1",
+
     "dotenv": "^16.0.3",
+
     "express": "^4.13.4",
     "mongoose": "^7.0.3",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "supertest": "^6.3.3"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^4.3.0",
+    "jest": "^29.5.0",
     "mocha": "^10.2.0"
   },
   "scripts": {
     "start": "export NODE_ENV=default && node index.js",
     "test": "NODE_ENV=testing mocha --recursive --exit --timeout 10000"
+
   },
   "bugs": {
     "url": "https://github.com/Ezinnem/bookshop/issues"
