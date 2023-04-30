@@ -2,11 +2,14 @@ require("dotenv").config();
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 
+let Book = require('../models/bookmodel');
+
 chai.use(chaiHttp);
 
 const expect = chai.expect;
 
 const app = require("../index");
+let should = chai.should();
 
 before(function (done) {
     this.timeout(5000);
@@ -42,6 +45,7 @@ describe("GET /getAllBooks", () => {
             .send()
             .then(res => {
                 expect(res).to.have.status(200);
+                expect(res).body.should.be.a('array');
                 done();
             })
             .catch(err => {
@@ -52,15 +56,36 @@ describe("GET /getAllBooks", () => {
 
   describe("POST /createOneBook", () => {
     it("should add a book", async () => {
+        let sampleBook = {"title": "Mocha Test", "author": "Test Author", "year": 2023 };
         chai.request(app)
-            .get("/createBook")
-            .send({"title": "Mocha Test", "author": "Test Author", "year": 2023 })
+            .post("/createBook")
+            .send(sampleBook)
             .then(res => {
-                expect(res).to.have.status(201);
+                expect(res).to.status(201);
+                expect(res).body.should.be.a('object');
                 done();
             })
             .catch(err => {
                 done(err);
             })
     });
+  });
+
+  describe('GET/:id book', () => {
+    it("should Get a book by the given id", async () => {
+        let sampleBook = new Book({"title": "Mocha Test", "author": "Test Author", "year": 2023 });
+        sampleBook.save((err, book) => {
+        chai.request(app)
+            .get("/book/" + sampleBook.id)
+            .send(sampleBook)
+            .then(res => {
+                expect(res).to.status(201);
+                expect(res).body.should.be.a('object');
+                done();
+            })
+            .catch(err => {
+                done(err);
+            })
+    });
+  });
   });
