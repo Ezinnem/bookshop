@@ -52,11 +52,11 @@ describe("GET /getAllBooks", () => {
                 done(err);
             })
     });
-  });
+});
 
-  describe("POST /createOneBook", () => {
+describe("POST /createOneBook", () => {
     it("should add a book", async () => {
-        let sampleBook = {"title": "Mocha Test", "author": "Test Author", "year": 2023 };
+        let sampleBook = { "title": "Mocha Test", "author": "Test Author", "year": 2023 };
         chai.request(app)
             .post("/createBook")
             .send(sampleBook)
@@ -69,23 +69,44 @@ describe("GET /getAllBooks", () => {
                 done(err);
             })
     });
-  });
+});
 
-  describe('GET/:id book', () => {
+describe('GET/:id book', () => {
     it("should Get a book by the given id", async () => {
-        let sampleBook = new Book({"title": "Mocha Test", "author": "Test Author", "year": 2023 });
+        let sampleBook = new Book({ "title": "Mocha Test", "author": "Test Author", "year": 2023 });
         sampleBook.save((err, book) => {
-        chai.request(app)
-            .get("/book/" + sampleBook.id)
-            .send(sampleBook)
-            .then(res => {
-                expect(res).to.status(201);
-                expect(res).body.should.be.a('object');
-                done();
-            })
-            .catch(err => {
-                done(err);
-            })
+            chai.request(app)
+                .get("/book/" + sampleBook.id)
+                .send(sampleBook)
+                .then(res => {
+                    expect(res).to.status(201);
+                    expect(res).body.should.be.a('object');
+                    done();
+                })
+                .catch(err => {
+                    done(err);
+                })
+        });
     });
-  });
-  });
+});
+
+describe('PUT/:ID book', () => {
+    it('it should UPDATE a book with the unique id', async () => {
+        let sampleBook = new Book({ "title": "Mocha Test", "author": "Test Author", "year": 2023 });
+        sampleBook.save((err, book) => {
+            chai.request(app)
+                .put("/book/" + sampleBook.id)
+                .send({ "title": "New updated Title" })
+                .then(res => {
+                    expect(res).to.status(200);
+                    expect(res).body.should.be.a('object');
+                    expect(res).body.should.have.property('message').eql('Success');
+                    expect(res).body.should.have.property('year').eql('2023');
+                    done();
+                })
+                .catch(err => {
+                    done(err);
+                })
+        });
+    });
+});
