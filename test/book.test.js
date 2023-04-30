@@ -95,13 +95,33 @@ describe('PUT/:ID book', () => {
         let sampleBook = new Book({ "title": "Mocha Test", "author": "Test Author", "year": 2023 });
         sampleBook.save((err, book) => {
             chai.request(app)
-                .put("/book/" + sampleBook.id)
+                .put("/updateBook/" + sampleBook.id)
                 .send({ "title": "New updated Title" })
                 .then(res => {
                     expect(res).to.status(200);
                     expect(res).body.should.be.a('object');
                     expect(res).body.should.have.property('message').eql('Success');
                     expect(res).body.should.have.property('year').eql('2023');
+                    done();
+                })
+                .catch(err => {
+                    done(err);
+                })
+        });
+    });
+});
+
+describe('DELETE/:ID book', () => {
+    it('it should UPDATE a book with the unique id', async () => {
+        let sampleBook = new Book({ "title": "Mocha Test", "author": "Test Author", "year": 2023 });
+        sampleBook.save((err, book) => {
+            chai.request(app)
+                .delete("/deleteBook/" + sampleBook.id)
+                .send({ "title": "New updated Title" })
+                .then(res => {
+                    expect(res).to.status(200);
+                    expect(res).body.should.be.a('object');
+                    expect(res).body.should.have.property('message').eql('Success');
                     done();
                 })
                 .catch(err => {
