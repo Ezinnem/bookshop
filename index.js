@@ -9,6 +9,7 @@ mongoose.connect(dbConfig, options).then(() => {
     console.log('Database connected..')
 })
 
+
 const app = express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
