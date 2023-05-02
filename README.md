@@ -5,7 +5,7 @@ An application for recording the books available as well as the books borrowed b
 
 ## Description
 
-Bookshop is built using React.js, Express, Node.js and the MongoDB database.
+Bookshop is built using React.js, Express, Node.js and the MongoDB database. The Mocha tool is used for testing
 
 ## Features:
 1. Displays the most recent Books with their basic details.
