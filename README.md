@@ -1,6 +1,6 @@
 # Bookshop
 
-A library application for recording the books available and the books borrowed by students.
+This is a library application for recording the books available and the books borrowed by students.
 
 ## Description
 
