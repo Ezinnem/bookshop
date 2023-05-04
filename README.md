@@ -9,4 +9,4 @@ Bookshop is built using React.js, Express, Node.js and the MongoDB database. The
 ## Features:
 1. Displays the most recent Books with their basic details.
 2. Shows students that borrowed the books.
-3. Use can filter through Search the genres of the books
+3. Use can filter through Search the genres of the books.
